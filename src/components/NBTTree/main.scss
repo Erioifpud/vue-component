@@ -1,0 +1,28 @@
+$main-color: #5a4ba3;
+
+ul {
+  padding-left: 0.8rem;
+  list-style: none;
+  margin-left: 0.5rem;
+}
+
+ul:not(:first-child) {
+  border-left: 1px dotted lighten($main-color, 15%);
+}
+
+.tree__name {
+  display: inline-block;
+}
+
+.tree__directory {
+  font-weight: 700;
+}
+
+.tree__directory_open {
+  color: $main-color;
+}
+
+.tree__value {
+  font-size: 0.8rem;
+  // vertical-align: sub;
+}

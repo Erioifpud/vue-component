@@ -10,7 +10,7 @@
       :items="components"
       @change="selected = arguments[0]"
     />
-    <div class="playground">
+    <div v-show="selected" class="playground">
       <component v-show="selected" :is="selected"></component>
     </div>
   </div>
@@ -63,5 +63,13 @@ body {
       color: #42b983;
     }
   }
+}
+
+.playground {
+  border: 1px solid #e4e0e0;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+  height: 100%;
+  box-sizing: border-box;
 }
 </style>
