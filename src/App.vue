@@ -35,8 +35,9 @@ export default {
     requireAll(component).forEach((item) => {
       // const name = (item.name || /(\S+\/)(\S+)\.vue/.exec(item.hotID)[2]).toLowerCase()
       // this.components.push(item)
-      console.log(item)
-      this.components.push(item.default)
+      if (!item.default.hide) {
+        this.components.push(item.default)
+      }
     })
   }
 }

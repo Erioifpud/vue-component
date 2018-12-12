@@ -1,7 +1,8 @@
 <template>
   <li>
     <div @click="toggleOpen" class="tree__name" :class="{tree__directory: isContainer, tree__directory_open: isOpen}">
-      <nbt-icon :type="data.type" />
+      <!-- <nbt-icon :type="data.type" /> -->
+      <component v-if="icon" :is="icon" v-bind="{[iconKey]: data.type}"></component>
       {{data.name}}
       <span v-if="isContainer" class="tree__value">
         <!-- [{{isOpen && '-' || '+'}}] -->
@@ -13,30 +14,37 @@
       </span>
     </div>
     <ul v-if="isContainer" v-show="isOpen">
-      <tree-wrapped v-for="(node, index) in data.value" :data="node" :key="node.name || index" />
+      <tree-wrapped
+        v-for="(node, index) in data.value"
+        :data="node"
+        :key="node.name || index"
+        :icon="icon"
+        :iconKey="iconKey"
+      />
     </ul>
   </li>
 </template>
 
 <script>
 import './main.scss'
-import NbtIcon from './NbtIcon'
 
 export default {
   name: 'TreeWrapped',
+  hide: true,
   data () {
     return {
       isOpen: false
     }
   },
-  components: {
-    NbtIcon
-  },
   props: {
     data: {
+      type: Object,
+      required: true
+    },
+    icon: {
       type: Object
     },
-    iconTypeKey: {
+    iconKey: {
       type: String
     }
   },

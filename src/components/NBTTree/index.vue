@@ -1,27 +1,27 @@
 <template>
-  <ul>
-    <tree-wrapped :data="example"/>
-  </ul>
+  <tree :data="data" :icon="NbtIcon" iconKey="type"></tree>
 </template>
 
 <script>
-import './main.scss'
-import TreeWrapped from './Wrapped'
-import example from './data.js'
+import Tree from '@/components/Tree'
+import NbtIcon from '@/components/NBTIcon'
 
 export default {
   name: 'NBTTree',
   components: {
-    TreeWrapped
+    Tree
   },
   data () {
     return {
-      example
+      NbtIcon
     }
   },
   props: {
     data: {
-      type: Object
+      type: Object,
+      default () {
+        return require('@/samples/nbt_tree_sample.js').default
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import './icon.scss'
+import './main.scss'
 
 export default {
   name: 'NBTIcon',
