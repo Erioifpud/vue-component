@@ -11,9 +11,9 @@
     >
     <div v-show="isFocus && showingItems && showingItems.length" class="dropdown__items">
       <div
-        v-for="item in showingItems"
+        v-for="(item, index) in showingItems"
         :key="item.name || item.toString()"
-        @click.prevent="handleItemClick(item)"
+        @click.prevent="handleItemClick(item, index)"
         class="dropdown__item"
       >
         {{item.name}}
@@ -36,10 +36,13 @@ export default {
   },
   computed: {
     filteredItems () {
-      return this.items.filter(item => (item.name || item.toString()).startsWith(this.value))
+      return this.mappedItems.filter(item => (item.name || item.toString()).startsWith(this.value))
     },
     showingItems () {
-      return this.searchMode ? this.filteredItems : this.items
+      return this.searchMode ? this.filteredItems : this.mappedItems
+    },
+    mappedItems () {
+      return this.map ? this.items.map(this.map) : this.items
     }
   },
   // watch: {
@@ -56,9 +59,9 @@ export default {
         this.searchMode = false
       }, 150)
     },
-    handleItemClick (item) {
+    handleItemClick (item, index) {
       this.value = item.name || item.toString()
-      this.$emit('change', item)
+      this.$emit('change', this.items[index])
     }
   },
   props: {
@@ -66,7 +69,11 @@ export default {
       type: String
     },
     items: {
-      type: Array
+      type: Array,
+      required: true
+    },
+    map: {
+      type: Function
     }
   }
 }
