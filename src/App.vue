@@ -12,7 +12,7 @@
       @change="selected = arguments[0]"
     />
     <div v-show="selected" class="playground">
-      <component v-show="selected" :is="selectedInstance"></component>
+      <component v-show="selected" :is="selectedInstance" v-bind="selectedProps"></component>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
     const requireAll = context => context.keys().map((item) => {
       return {
         module: context(item),
-        props: item.replace(/\.vue$/, '.props.js')
+        props: item.replace(/^\./, './components').replace(/\.vue$/, '.props.js')
       }
     })
     // requireAll(component).forEach((item) => {
@@ -56,15 +56,18 @@ export default {
     // })
 
     this.components = requireAll(component).filter(item => !item.module.default.hide).map(item => {
-      const instance = {
+      const obj = {
         instance: item.module.default
       }
       try {
-        instance.props = require(item.props).default
+        // fail: item.props
+        // success: `${item.props}`
+        // ???
+        obj.props = require(`${item.props}`).default
       } catch (error) {
-        instance.props = {}
+        obj.props = {}
       }
-      return instance
+      return obj
     })
   }
 }

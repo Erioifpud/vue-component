@@ -15,10 +15,7 @@ export default {
   },
   props: {
     data: {
-      type: Object,
-      default () {
-        return require('@/samples/tree_sample.js').default
-      }
+      type: Object
     },
     icon: {
       type: Object
