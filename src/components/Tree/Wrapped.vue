@@ -6,14 +6,14 @@
       {{data.name}}
       <span v-if="isContainer" class="tree__value">
         <!-- [{{isOpen && '-' || '+'}}] -->
-        <i v-show="isOpen" class="fas fa-caret-down"></i>
-        <i v-show="!isOpen" class="fas fa-caret-right"></i>
+        <i v-show="isOpen" class="fas fa-fw fa-caret-down"></i>
+        <i v-show="!isOpen" class="fas fa-fw fa-caret-right"></i>
       </span>
       <span v-else class="tree__value">
         {{data.value}}
       </span>
     </div>
-    <ul v-if="isContainer" v-show="isOpen">
+    <ul v-if="isContainer" v-show="isOpen" class="tree__mask">
       <tree-wrapped
         v-for="(node, index) in data.value"
         :data="node"

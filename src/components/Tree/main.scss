@@ -1,13 +1,13 @@
 $main-color: #5a4ba3;
 
-ul {
+.tree {
   padding-left: 0.8rem;
   list-style: none;
   margin-left: 0.5rem;
-}
 
-ul:not(:first-child) {
-  border-left: 1px dotted lighten($main-color, 15%);
+  &:not(:first-child) {
+    border-left: 1px dotted lighten($main-color, 15%);
+  }
 }
 
 .tree__name {

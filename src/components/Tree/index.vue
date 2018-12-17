@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="tree">
     <tree-wrapped :data="data" :icon="icon" :iconKey="iconKey" />
   </ul>
 </template>
