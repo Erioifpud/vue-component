@@ -1,0 +1,136 @@
+$default-color: #d9d9d9;
+$hover-color: #bababa;
+$main-color: #5a4ba3;
+$switch-bg-color: #d9d9d9;
+
+.er-input {
+  display: inline-block;
+  position: relative;
+  margin: 0.5rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: all .15s ease-out;
+}
+
+.er-input__text {
+  font-size: inherit;
+  background-color: #f4f4f4;
+  color: #404040;
+  text-indent: 1rem;
+  height: 2.5rem;
+  border: 1px solid #e4e0e0;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: inherit;
+
+  &:focus {
+    border-color: $main-color;
+  }
+
+  &:hover {
+    border-color: $main-color;
+  }
+
+  &:focus {
+    box-shadow: inset 0 3px 5px 0 rgba(91, 73, 150,.2);
+  }
+}
+
+.er-input__check {
+  // opacity: 0;
+  display: none;
+
+  & + .er-input__check-tips {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  & + .er-input__check-tips::before {
+    content: '';
+    display: inline-block;
+    margin-right: 0.625rem;
+    vertical-align: text-top;
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    border: 0.125rem solid $default-color;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+  }
+
+  &:hover + .er-input__check-tips::before {
+    border-color: $hover-color;
+  }
+
+  &:checked + .er-input__check-tips::before {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+
+  &:checked + .er-input__check-tips::after {
+    position: absolute;
+    left: 0.3125rem;
+    top: 0.5625rem;
+    width: 0.125rem;
+    height: 0.125rem;
+    background: white;
+    box-shadow: 
+      0.125rem 0 0 white,
+      0.25rem 0 0 white,
+      0.25rem -0.125rem 0 white,
+      0.25rem -0.25rem 0 white,
+      0.25rem -0.375px 0 white,
+      0.25rem -0.5px 0 white;
+    transform: rotate(45deg);
+    transition: all 0.2s;
+  }
+}
+
+.er-input__switch {
+  display: none;
+
+  & + .er-input__switch-tips {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  & + .er-input__switch-tips::before {
+    content: '';
+    display: inline-block;
+    margin-right: 0.625rem;
+    vertical-align: text-top;
+    width: 3rem;
+    height: 1rem;
+    background-color: $default-color;
+    border: 0.125rem solid $default-color;
+    border-radius: 1rem;
+    transition: all 0.2s;
+  }
+
+  &:hover + .er-input__switch-tips::before {
+    background-color: $hover-color;
+    border-color: $hover-color;
+  }
+
+  &:checked + .er-input__switch-tips::before {
+    background-color: $main-color;
+    border-color: $main-color;
+  }
+
+  & + .er-input__switch-tips::after {
+    content: '';
+    position: absolute;
+    left: 0.1rem;
+    top: 0.15rem;
+    width: 1rem;
+    height: 1rem;
+    background: white;
+    border-radius: 1rem;
+    transition: all 0.4s;
+  }
+
+  &:checked + .er-input__switch-tips::after {
+    left: 2.1rem;
+    top: 0.15rem;
+  }
+}

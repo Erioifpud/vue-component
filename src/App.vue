@@ -12,7 +12,7 @@
       @change="selected = arguments[0]"
     />
     <div v-show="selected" class="playground">
-      <component v-show="selected" :is="selectedInstance" v-bind="selectedProps"></component>
+      <component v-model="defaultModel" v-show="selected" :is="selectedInstance" v-bind="selectedProps"></component>
     </div>
   </div>
 </template>
@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       components: [],
-      selected: undefined
+      selected: undefined,
+      defaultModel: 'abcd'
     }
   },
   computed: {
