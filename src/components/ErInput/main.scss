@@ -2,6 +2,8 @@ $default-color: #d9d9d9;
 $hover-color: #bababa;
 $main-color: #5a4ba3;
 $switch-bg-color: #d9d9d9;
+$text-bg-color: #f4f4f4;
+$text-br-color: #e4e0e0;
 
 .er-input {
   display: inline-block;
@@ -14,11 +16,11 @@ $switch-bg-color: #d9d9d9;
 
 .er-input__text {
   font-size: inherit;
-  background-color: #f4f4f4;
+  background-color: $text-bg-color;
   color: #404040;
   text-indent: 1rem;
   height: 2.5rem;
-  border: 1px solid #e4e0e0;
+  border: 1px solid $text-br-color;
   border-radius: 0.5rem;
   outline: none;
   transition: inherit;
@@ -36,8 +38,16 @@ $switch-bg-color: #d9d9d9;
   }
 }
 
+.er-input__text:disabled {
+  background: linear-gradient(45deg, $text-bg-color 25%, $text-br-color 0, $text-br-color 50%, $text-bg-color 0, $text-bg-color 75%, $text-br-color 0);
+  background-size: 3rem 3rem;
+  
+  &:hover {
+    border-color: #e4e0e0;
+  }
+}
+
 .er-input__check {
-  // opacity: 0;
   display: none;
 
   & + .er-input__check-tips {
@@ -68,6 +78,7 @@ $switch-bg-color: #d9d9d9;
   }
 
   &:checked + .er-input__check-tips::after {
+    content: '';
     position: absolute;
     left: 0.3125rem;
     top: 0.5625rem;
@@ -79,10 +90,27 @@ $switch-bg-color: #d9d9d9;
       0.25rem 0 0 white,
       0.25rem -0.125rem 0 white,
       0.25rem -0.25rem 0 white,
-      0.25rem -0.375px 0 white,
-      0.25rem -0.5px 0 white;
+      0.25rem -0.375rem 0 white,
+      0.25rem -0.5rem 0 white;
     transform: rotate(45deg);
     transition: all 0.2s;
+  }
+}
+
+.er-input__check:disabled {
+  & + .er-input__check-tips {
+    cursor: auto;
+    font-style: italic;
+    text-decoration: line-through;
+  }
+
+  & + .er-input__check-tips::before {
+    background: linear-gradient(45deg, $text-bg-color 25%, $text-br-color 0, $text-br-color 50%, $text-bg-color 0, $text-bg-color 75%, $text-br-color 0);
+    background-size: 1rem 1rem;
+  }
+
+  &:hover + .er-input__check-tips::before {
+    border-color: $default-color;
   }
 }
 
@@ -126,11 +154,34 @@ $switch-bg-color: #d9d9d9;
     height: 1rem;
     background: white;
     border-radius: 1rem;
+    box-shadow: 0 1px 2px #8d8d8d;
     transition: all 0.4s;
   }
 
   &:checked + .er-input__switch-tips::after {
     left: 2.1rem;
     top: 0.15rem;
+  }
+}
+
+.er-input__switch:disabled {
+  & + .er-input__switch-tips {
+    cursor: auto;
+    font-style: italic;
+    text-decoration: line-through;
+  }
+
+  & + .er-input__switch-tips::before {
+    background: linear-gradient(45deg, $text-bg-color 25%, $text-br-color 0, $text-br-color 50%, $text-bg-color 0, $text-bg-color 75%, $text-br-color 0);
+    background-size: 1rem 1rem;
+  }
+
+  & + .er-input__switch-tips::after {
+    box-shadow: none;
+  }
+
+  &:hover + .er-input__switch-tips::before {
+    // background-color: $default-color;
+    border-color: $default-color;
   }
 }

@@ -1,0 +1,32 @@
+$default-color: #d9d9d9;
+
+.panel {
+  min-height: 3rem;
+  border: 1px solid $default-color;
+  margin: 0.5rem;
+  box-sizing: border-box;
+}
+
+.panel__header {
+  box-sizing: border-box;
+  // cursor: pointer;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: left;
+  background-color: #ecf0f1;
+  padding: 0 1rem;
+  border-bottom: 1px solid #bdc3c7;
+  color: #626c6d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panel__content {
+  padding: 1rem;
+}
+
+.panel__content_border {
+  box-sizing: border-box;
+  border: 1px dashed #bdc3c7;
+}

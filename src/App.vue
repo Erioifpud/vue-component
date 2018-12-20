@@ -11,18 +11,28 @@
       :map="e => e.instance"
       @change="selected = arguments[0]"
     />
-    <div v-show="selected" class="playground">
-      <component v-model="defaultModel" v-show="selected" :is="selectedInstance" v-bind="selectedProps"></component>
-    </div>
+    <template v-if="selected">
+      <panel v-if="selectedBinding" title="Binding" :border="true">
+        <component :is="selectedInstance" v-bind="selectedBinding"></component>
+      </panel>
+      <panel v-if="selectedModel" :title="`Model: ${selectedModel.value}`" :border="true">
+        <component :is="selectedInstance" v-model="selectedModel.value" v-bind="selectedModel.binding || {}"></component>
+      </panel>
+      <panel v-if="selectedState" :title="`State: ${selectedState.length}`" :border="true">
+        <component :is="selectedInstance" v-for="(state, index) in selectedBinding" v-bind="state" :key="index"></component>
+      </panel>
+    </template>
   </div>
 </template>
 
 <script>
 import Dropdown from '@/components/Dropdown'
+import Panel from '@/components/Panel'
 
 export default {
   components: {
-    Dropdown
+    Dropdown,
+    Panel
   },
   data () {
     return {
@@ -35,8 +45,17 @@ export default {
     selectedInstance () {
       return this.selected ? this.selected.instance : undefined
     },
-    selectedProps () {
-      return this.selected ? this.selected.props : {}
+    selectedData () {
+      return this.selected ? this.selected.data : undefined
+    },
+    selectedBinding () {
+      return this.selectedData ? this.selectedData.binding : undefined
+    },
+    selectedModel () {
+      return this.selectedData ? this.selectedData.model : undefined
+    },
+    selectedState () {
+      return this.selectedData ? this.selectedData.state : undefined
     }
   },
   mounted () {
@@ -44,7 +63,7 @@ export default {
     const requireAll = context => context.keys().map((item) => {
       return {
         module: context(item),
-        props: item.replace(/^\./, './components').replace(/\.vue$/, '.props.js')
+        data: item.replace(/^\./, './components').replace(/\.vue$/, '.data.js')
       }
     })
     // requireAll(component).forEach((item) => {
@@ -64,9 +83,9 @@ export default {
         // fail: item.props
         // success: `${item.props}`
         // ???
-        obj.props = require(`${item.props}`).default
+        obj.data = require(`${item.data}`).default
       } catch (error) {
-        obj.props = {}
+        obj.data = {}
       }
       return obj
     })
