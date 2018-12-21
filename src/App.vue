@@ -19,7 +19,10 @@
         <component :is="selectedInstance" v-model="selectedModel.value" v-bind="selectedModel.binding || {}"></component>
       </panel>
       <panel v-if="selectedState" :title="`State: ${selectedState.length}`" :border="true">
-        <component :is="selectedInstance" v-for="(state, index) in selectedBinding" v-bind="state" :key="index"></component>
+        <component :is="selectedInstance" v-for="(state, index) in selectedState" v-bind="state" :key="index"></component>
+      </panel>
+      <panel v-if="!(selectedBinding || selectedModel || selectedState)" title="Vanilla" :border="true">
+        <component :is="selectedInstance"></component>
       </panel>
     </template>
   </div>
