@@ -1,10 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/> -->
     <dropdown
       placeholder="select component"
       :items="components"
@@ -18,8 +13,10 @@
       <panel v-if="selectedModel" :title="`Model: ${selectedModel.value}`" :border="true">
         <component :is="selectedInstance" v-model="selectedModel.value" v-bind="selectedModel.binding || {}"></component>
       </panel>
-      <panel v-if="selectedState" :title="`State: ${selectedState.length}`" :border="true">
-        <component :is="selectedInstance" v-for="(state, index) in selectedState" v-bind="state" :key="index"></component>
+      <panel v-if="selectedState" :title="`State: ${selectedState.length}`">
+        <panel v-for="(state, index) in selectedState" :key="index" :title="formatObj(state)" :border="true">
+          <component :is="selectedInstance"  v-bind="state" ></component>
+        </panel>
       </panel>
       <panel v-if="!(selectedBinding || selectedModel || selectedState)" title="Vanilla" :border="true">
         <component :is="selectedInstance"></component>
@@ -40,8 +37,7 @@ export default {
   data () {
     return {
       components: [],
-      selected: undefined,
-      defaultModel: 'abcd'
+      selected: undefined
     }
   },
   computed: {
@@ -59,6 +55,11 @@ export default {
     },
     selectedState () {
       return this.selectedData ? this.selectedData.state : undefined
+    }
+  },
+  methods: {
+    formatObj (obj) {
+      return Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join(', ')
     }
   },
   mounted () {
