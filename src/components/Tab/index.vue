@@ -9,7 +9,7 @@
         @click="handleClick(item, index)"
         class="tab__header-item"
       >
-        <i v-if="item.icon" :class="item.icon"></i>
+        <i v-if="item.icon" class="fa-fw" :class="item.icon"></i>
         {{ item.title }}
         <span v-if="item.closable && !item.disabled" class="tab__item-close" @click.stop="handleClose(item)">×</span>
       </div>
@@ -46,7 +46,8 @@ export default {
       // selected: 0,
       selectedKey: this.value,
       selectedBarWidth: 0,
-      selectedBarOffset: 0
+      selectedBarOffset: 0,
+      dragging: false
     }
   },
   watch: {
@@ -174,6 +175,22 @@ export default {
       }
       this.updateSelectedBar()
     })
+
+    // this.$refs.tabHeader.onmousedown = (e) => {
+    //   this.dragging = true
+    //   const startX = e.offsetX
+    //   this.$refs.tabHeader.onmousemove = (e) => {
+    //     if (this.dragging) {
+    //       let endX = e.offsetX
+    //       let tmpX = endX - startX
+    //       console.log(tmpX)
+    //     }
+    //   }
+
+    //   this.$refs.tabHeader.onmouseup = () => {
+    //     this.dragging = false
+    //   }
+    // }
   }
 }
 </script>

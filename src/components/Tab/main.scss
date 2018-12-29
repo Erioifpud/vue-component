@@ -10,11 +10,20 @@ $main-color: #5a4ba3;
   padding: 0;
   display: flex;
   flex-direction: row;
-
-  // overflow: auto;
+  user-select: none;
+  overflow: auto;
 
   white-space: nowrap;
   border-bottom: 1px solid #dfdfdf;
+  
+  &::-webkit-scrollbar {
+    height: 1px;
+    background-color: #ffffff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #dfdfdf; 
+  }
 }
 
 .tab__header-item {
