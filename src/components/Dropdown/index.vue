@@ -13,7 +13,7 @@
       <div
         v-for="(item, index) in showingItems"
         :key="item.name || item.toString()"
-        @click.prevent="handleItemClick(item, index)"
+        @mousedown="handleItemClick(item, index)"
         class="dropdown__item"
       >
         {{item.name}}
@@ -54,10 +54,8 @@ export default {
   // },
   methods: {
     handleBlur () {
-      setTimeout(() => {
-        this.isFocus = false
-        this.searchMode = false
-      }, 150)
+      this.isFocus = false
+      this.searchMode = false
     },
     handleItemClick (item, index) {
       this.value = item.name || item.toString()
