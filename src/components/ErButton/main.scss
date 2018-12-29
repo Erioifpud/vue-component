@@ -1,0 +1,139 @@
+@mixin coloredButtonStyle($baseColor) {
+  background-color: $baseColor;
+  border: 1px solid $baseColor;
+  color: #fff;
+
+  &:not(.er-button_disabled) {
+    &:hover {
+      $newColor: lighten($baseColor, 5%);
+      background-color: $newColor;
+      border-color: $newColor;
+    }
+  
+    &:active {
+      $newColor: darken($baseColor, 5%);
+      background-color: $newColor;
+      border-color: $newColor;
+    }
+  } 
+}
+
+@mixin outlinedButtonStyle($baseColor) {
+  background-color: transparent;
+  border: 1px solid $baseColor;
+  color: $baseColor;
+
+  &:not(.er-button_disabled) {
+    &:hover {
+      $newColor: lighten($baseColor, 5%);
+      background-color: rgba($newColor, 0.2);
+      border-color: $newColor;
+    }
+  
+    &:active {
+      $newColor: darken($baseColor, 5%);
+      background-color: rgba($newColor, 0.2);
+      border-color: $newColor;
+    }
+  } 
+}
+
+
+@mixin normalButtonStyle($baseColor) {
+  border: 1px solid #d8d8d8;
+
+  &:not(.er-button_disabled) {
+    &:hover {
+      border-color: lighten($baseColor, 5%);
+      color: lighten($baseColor, 5%);
+    }
+
+    &:active {
+      border-color: darken($baseColor, 5%);
+      color: darken($baseColor, 5%);
+    }
+  }
+}
+
+.er-button {
+  display: inline-block;
+  outline: none;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.9rem;
+  height: 2.5rem;
+  color: #657180;
+  font-weight: 500;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+
+  &_full {
+    width: 100%;
+  }
+
+  &_round {
+    border-radius: 10rem;
+  }
+
+  &_primary {
+    @include coloredButtonStyle(#2f68ba);
+    // @include outlinedButtonStyle(#2f68ba);
+  }
+
+  &_info {
+    @include coloredButtonStyle(#4696ec);
+    // @include outlinedButtonStyle(#4696ec);
+  }
+
+  &_success {
+    @include coloredButtonStyle(#67ac5b);
+    // @include outlinedButtonStyle(#67ac5b);
+  }
+
+  &_warning {
+    @include coloredButtonStyle(#f6c244);
+    // @include outlinedButtonStyle(#f6c244);
+  }
+
+  &_error {
+    @include coloredButtonStyle(#ed5f59);
+    // @include outlinedButtonStyle(#ed5f59);
+  }
+
+  &_primary.er-button_outline {
+    // @include coloredButtonStyle(#2f68ba);
+    @include outlinedButtonStyle(#2f68ba);
+  }
+
+  &_info.er-button_outline {
+    // @include coloredButtonStyle(#4696ec);
+    @include outlinedButtonStyle(#4696ec);
+  }
+
+  &_success.er-button_outline {
+    // @include coloredButtonStyle(#67ac5b);
+    @include outlinedButtonStyle(#67ac5b);
+  }
+
+  &_warning.er-button_outline {
+    // @include coloredButtonStyle(#f6c244);
+    @include outlinedButtonStyle(#f6c244);
+  }
+
+  &_error.er-button_outline {
+    // @include coloredButtonStyle(#ed5f59);
+    @include outlinedButtonStyle(#ed5f59);
+  }
+
+  &_normal {
+    @include normalButtonStyle(#4f99f7);
+    // @include outlinedButtonStyle(#4f99f7);
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    border-color: #cdd3da;
+    background-color: #f5f5f5;
+    color: #c3cbd6;
+  }
+}
