@@ -1,0 +1,20 @@
+.editor {
+  .editor__header {
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+    padding: 0.2rem 0;
+
+    .editor__toggle-button {
+      display: inline-block;
+      // width: 100%;
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        border: 1px solid #dddddd;
+      }
+    }
+  }
+}

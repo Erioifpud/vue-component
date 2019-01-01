@@ -70,6 +70,7 @@ export default {
   },
   watch: {
     vue (newVal) {
+      this.destroyComponent()
       this.generateComponent()
     }
   },
