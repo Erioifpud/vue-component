@@ -1,10 +1,19 @@
 <template>
   <div class="editor">
     <div class="editor__header">
-      <button class="editor__toggle-button" @click="previewMode = !previewMode">{{ previewMode ? 'Edit' : 'Preview' }}</button>
+      <button class="editor__button" @click="$router.back()">Back</button>
+      <button class="editor__button editor__button-toggle" @click="previewMode = !previewMode">{{ previewMode ? 'Edit' : 'Preview' }}</button>
     </div>
-    <codemirror v-show="!previewMode" v-model="code" :options="cmOptions"></codemirror>
-    <render v-show="previewMode" :vue="code"></render>
+
+    <div class="editor__content" :style="style">
+      <div class="editor__content-item">
+        <codemirror v-model="code" :options="cmOptions"></codemirror>
+      </div>
+      <div class="editor__content-item">
+        <render :vue="code"></render>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -32,6 +41,13 @@ export default {
         theme: 'one-dark',
         lineNumbers: true,
         line: true
+      }
+    }
+  },
+  computed: {
+    style () {
+      return {
+        transform: `translateX(-${+this.previewMode}00%) translateZ(0px)`
       }
     }
   },
